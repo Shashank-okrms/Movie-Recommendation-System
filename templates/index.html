@@ -1,0 +1,125 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        #search-container {
+            background-color: #fff;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        #search-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #movie_name {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: none;
+        }
+
+        #initial-movies {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .movie-card {
+            margin: 10px;
+            text-align: center;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            border-radius: 8px;
+            max-width: 200px;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+        }
+
+        .movie-card h2 {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .movie-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 8px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <script>
+        function handleImageError(image) {
+            // Set the src attribute to an empty string or a default image path
+            image.src = '';
+            image.alt = 'Image not available';
+        }
+    </script>
+</head>
+<body>
+    <h1>Movie Recommendations</h1>
+
+    <div id="search-container">
+        <!-- Search bar for recommendations -->
+        <form id="search-form" action="/recommendations" method="post">
+            <input type="text" id="movie_name" name="movie_name" placeholder="Enter a movie name" required>
+            <button type="submit">Get Recommendations</button>
+        </form>
+    </div>
+    
+    <!-- Display initial movies here -->
+    <div id="initial-movies">
+        {% for movie in movie_data %}
+            <div class="movie-card">
+                <img src="{{ url_for('get_image', movie_name=movie.title) }}" alt="{{ movie.title }} Poster" onerror="handleImageError(this)">
+                <h2>{{ movie.title }}</h2>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
