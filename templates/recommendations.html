@@ -1,0 +1,61 @@
+<!-- recommendation.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        #recommendations {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .movie-card {
+            margin: 10px;
+            text-align: center;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-card h2 {
+            margin-bottom: 10px;
+        }
+
+        .movie-card img {
+            max-width: 80%; /* Adjust the size as needed */
+            height: auto;
+            border-radius: 5px; /* Add a border radius for a rounded corner effect */
+        }
+    </style>
+</head>
+<body>
+    <h1>Recommended Movies</h1>
+    
+    <!-- Display recommended movies dynamically here -->
+    <div id="recommendations">
+        {% for movie in movies %}
+            <div class="movie-card">
+                <h2>{{ movie.title }}</h2>
+                <img src="{{ movie.poster_url }}" alt="{{ movie.title }} Poster">
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
